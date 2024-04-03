@@ -1,3 +1,5 @@
+use crate::CudaError;
+use crate::memory::DeviceMemory;
 
 // high-level abstraction for CUDA device
 pub struct Device {

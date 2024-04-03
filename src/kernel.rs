@@ -1,3 +1,4 @@
+use crate::CudaError;
 
 // trait to represent arguments that can be passed to kernels
 pub trait KernelArg {

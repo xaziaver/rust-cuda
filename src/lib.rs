@@ -6,8 +6,8 @@ mod nvrtc;     // runtime compilation of CUDA kernels
 
 
 // re-export key types and functionalities for easier access by library users
-pub use memory::DeviceMemory
-pub use device::Device
+pub use memory::DeviceMemory;
+pub use device::Device;
 pub use kernel::{Kernel, KernelArg};
 
 
