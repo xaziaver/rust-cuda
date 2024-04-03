@@ -1,16 +1,14 @@
-# Rust-CUDA Interface for MoE Layer Optimization
+# rust-cuda
+The `rust-cuda` library aims to provide a Rustic interface for CUDA programming, enabling Rust developers to write and execute CUDA kernels directly from Rust.
 
-## Introduction
-This repository is an educational project aimed at learning about CUDA programming and developing a Rust-CUDA interface specifically tailored for creating custom kernels to optimize the Mixture of Experts (MoE) layer in large language models (LLMs).
-
-The goal is to create a minimal and focused Rust-CUDA interface that provides the necessary functionality to write and launch custom CUDA kernels for the MoE layer, enabling efficient and optimized computation on NVIDIA GPUs.
+This was created with the intention of being used specifically to create custom kernels to optimize a Mixture of Experts (MoE) layer in large language models (LLMs).
 
 ## How To Use
 1. Initialization:
    - start by selecting a CUDA device and allocating necessary memory on the device using `device` and `memory` modules
 2. Kernel Development:
    - instead of writing CUDA kernels in C/C++, write kernel logic directly in Rust
-   - the library provides mechanisms to compile Rust code into CUDA-compatible kernels (maybe through NVRTC or pre-compilation to PTX)
+   - the library provides mechanisms to compile Rust code into CUDA-compatible kernels (through NVRTC)
 3. Kernel Execution:
    - with kernels compiled, execute them by passing inputs (data, model parameters) from Rust to the GPU, perform the computation, and then retrieve the results back into Rust
 4. Optimization Loop:
@@ -18,6 +16,18 @@ The goal is to create a minimal and focused Rust-CUDA interface that provides th
 5. Integration into Larger Models:
    - the kernels can be integrated (with a focus on MoE layers)
 
+## Project Structure
+The library is organized into several modules, each responsible for different aspects of CUDA programming:
+- `src/lib.rs`: The main entry point of the library, tying together various modules and functionalities
+- `src/memory.rs`: Handles GPU memory allocation, deallocation, and data transfers
+- `src/device.rs`: Manages CUDA device selection and queries device properties
+- `src/kernel.rs`: Focuses on compiling, managing, and executing CUDA kernels
+- `src/cuda/mod.rs`:Contains low-level bindings and safe wrappers for CUDA API calls
+  - `src/cuda/ffi.rs`: Raw FFI bindings to CUDA's C APIs
+  - `src/cuda/wrapper.rs`: Safe, idiomatic Rust wrappers around the CUDA FFI bindings
+- `src/nvrtc/mod.rs`: Facilitates runtime compilation of CUDA kernels using NVRTC
+  - `src/nvrtc/ffi.rs`: Raw FFI bindings to NVRTC's C APIs
+  - `src/nvrtc/compiler.rs`: Higher-level functionality for compiling and managing CUDA code at runtime
 
 ## Project Outline
 To develop the Rust-CUDA interface, the following steps will be taken:
@@ -71,18 +81,5 @@ To develop the Rust-CUDA interface, the following steps will be taken:
    - Document any limitations, performance considerations, or best practices when using the interface.
 
 ## Getting Started
-To get started with developing the Rust-CUDA interface, follow these steps:
 
-1. Install Rust and the necessary development tools.
-2. Set up the CUDA Toolkit and ensure it is properly configured.
-3. Clone this repository to your local machine.
-4. Create a new Rust library project for the Rust-CUDA interface.
-5. Implement the CUDA API bindings, memory management, and kernel launching functionalities.
-6. Write Rust code to test and verify the functionality of the interface.
-7. Incrementally extend the interface to support additional features required for the custom MoE kernels.
-8. Document your progress, API design decisions, and any challenges encountered.
-
-## Resources
-- [CUDA C++ Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html)
-- [Rust Documentation](https://www.rust-lang.org/learn)
-- [Rust FFI](https://rust-lang.github.io/unsafe-code-guidelines/ffi.html)
+(add instructions on how to build, run tests, and basic usage examples)
