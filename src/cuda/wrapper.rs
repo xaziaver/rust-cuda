@@ -12,3 +12,14 @@ pub fn allocate_memory(size: usize) -> Result<CUdeviceptr, CUresult> {
         _ => Err(result),
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_memory_allocation() {
+        let result = allocate_memory(1024);
+        assert!(result.is_ok());
+    }
+}
