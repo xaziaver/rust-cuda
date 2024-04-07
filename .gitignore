@@ -7,3 +7,4 @@ Cargo.lock
 *.o
 *.obj
 .DS_Store
+notes.md

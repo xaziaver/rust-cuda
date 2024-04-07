@@ -15,7 +15,8 @@ fn main() {
 
     // if CUDA_LIB_PATH is found, proceed to instruct cargo to link against CUDA libraries
     println!("cargo:rustc-link-search=native={}", cuda_lib_path);
+    println!("cargo:rustc-link-lib=cuda");          // CUDA driver library
     println!("cargo:rustc-link-lib=cudart");        // CUDA runtime library for simple management
-    println!("cargo:rustc-link-lib=nvrtc");         // NVRTC library for kernels
+    println!("cargo:rustc-link-lib=nvrtc");         // NVRTC library for kernel compilation
     // more libraries to link?
 }
