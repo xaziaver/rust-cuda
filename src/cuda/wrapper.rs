@@ -1,25 +1,29 @@
-use crate::CudaError;
-use crate::cuda::ffi::cuMemAlloc;
-use crate::cuda::ffi::CUdeviceptr;
-use crate::cuda::ffi::CUresult;
+use super::CudaApi;
+use super::ffi::{cuMemAlloc, CUdeviceptr, CUresult};
 
-pub fn allocate_memory(size: usize) -> Result<CUdeviceptr, CUresult> {
-    let mut device_ptr: CUdeviceptr = 0;
-    let result = unsafe { cuMemAlloc(&mut device_ptr, size) };
+pub struct RealCudaApi;
 
-    match result {
-        CUresult::CUDA_SUCCESS => Ok(device_ptr),
-        _ => Err(result),
+impl CudaApi for RealCudaApi {
+    fn allocate_memory(size: usize) -> Result<CUdeviceptr, CUresult> {
+        let mut device_ptr: CUdeviceptr = 0;
+        let result = unsafe { cuMemAlloc(&mut device_ptr, size) };
+
+        match result {
+            CUresult::CUDA_SUCCESS => Ok(device_ptr),
+            _ => Err(result),
+        }
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::super::{CudaApi, CudaApiImpl};
+    use std::ptr;
 
     #[test]
     fn test_memory_allocation() {
-        let result = allocate_memory(1024);
+        let cuda_api = CudaApiImpl;
+        let result = acuda_api.allocate_memory(1024);
         assert!(result.is_ok());
     }
 }

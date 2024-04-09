@@ -7,14 +7,6 @@
 // linking can be dynamic (shared libraries at runtime) or static (include library directly in binary)
 // 
 
-
-// within this block, list names and signatures of external C functions used
-////////////////////////////////////////////////////////////////////////////
-extern "C" {        // extern says functions are impl using "X" language ABI
-    pub fn cuMemAlloc(dptr: *mut CUdeviceptr, bytesize: usize) -> CUresult;
-}
-
-
 // manually define custom types used by the C functions in Rust
 ///////////////////////////////////////////////////////////////
 // docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9
@@ -30,3 +22,12 @@ pub enum CUresult {
 
 // should match the size of a pointer per CUDA docs
 pub type CUdeviceptr = usize;
+
+
+// within this block, list names and signatures of external C functions used
+////////////////////////////////////////////////////////////////////////////
+extern "C" {        // extern says functions are impl using "X" language ABI
+    pub fn cuMemAlloc(dptr: *mut CUdeviceptr, bytesize: usize) -> CUresult;
+}
+
+

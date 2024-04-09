@@ -1,5 +1,6 @@
 mod ffi;
 
+/*
 // use 'mock' implementation when feature flag enabled
 #[cfg(feature = "mock")]
 mod mock;
@@ -11,4 +12,4 @@ pub use mock::MockvNvrtcApi as NvrtcApi;
 mod compiler;
 #[cfg(not(feature = "mock"))]
 pub use compiler::RealNvrtcApi as NvrtcApi;
-
+*/
